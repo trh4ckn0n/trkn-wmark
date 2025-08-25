@@ -1,9 +1,9 @@
 streamlit
-pillow==10.0.1
-numpy==1.26.0
-cryptography==41.0.4      # si tu veux AES ou autres fonctions de chiffrement avancées
+pillow
+numpy
+cryptography      # si tu veux AES ou autres fonctions de chiffrement avancées
 pycryptodome      # alternative AES + chiffrement plus performant
 opencv-python-headless==4.8.1.78  # si traitement d’images plus avancé
-scikit-image==1.3.0       # détection de motifs, comparaison avancée
+scikit-image       # détection de motifs, comparaison avancée
 requests           # pour appels API externes (ex: OpenAI)
-openai==0.28             # si utilisation OpenAI pour motifs complexes
+openai==0.28.1             # si utilisation OpenAI pour motifs complexes
