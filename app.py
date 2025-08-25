@@ -194,8 +194,13 @@ a:hover { text-decoration:underline; color:#ffd700; }
 
 st.title("⚡ MOTIF CHALLENGE - trhacknon ⚡")
 st.markdown("#### Génération, application et détection de motifs complexes | Dark Mode Hacker")
-video_file = "https://j.top4top.io/m_3524t2w3f0.mp4"
-st.video(video_file, start_time=0)
+video_html = """
+<video width="100%" autoplay muted loop playsinline>
+  <source src="https://j.top4top.io/m_3524t2w3f0.mp4" type="video/mp4">
+  Votre navigateur ne supporte pas la vidéo.
+</video>
+"""
+st.markdown(video_html, unsafe_allow_html=True)
 # ---------------- GENERATION MOTIF -----------------
 st.subheader("🔹 Générer un motif unique")
 username = st.text_input("Nom / identifiant du membre")
