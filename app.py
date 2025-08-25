@@ -77,27 +77,118 @@ def sha256_bytes(data: bytes):
 # ---------------- STYLE -----------------
 st.markdown("""
 <style>
-body { background-color:#050505; color:#00ff00; font-family:'Courier New', monospace; }
-h1,h2,h3 { color:#fff000; text-shadow:0 0 10px #ffff00,0 0 20px #00ff00; animation:flicker 1.5s infinite alternate; font-weight:bold; }
-h4,h5,h6 { color:#00ffff; text-shadow:0 0 10px #ff0000,0 0 20px #00ff00; animation:flicker 1.5s infinite alternate; font-weight:bold; }
-p  { color:#00ffff; text-shadow:0 0 10px #ff0000,0 0 20px #00ff00; animation:flicker 1.5s infinite alternate; font-weight:bold; }
-li, span { color:#00ff00; }
-.stButton>button { background-color:#111111; color:#00ff00; border:2px solid #00ff00; font-weight:bold; padding:0.5em 1em; text-transform:uppercase; transition:0.3s; }
-.stButton>button:hover { background-color:#00ff00; color:#050505; box-shadow:0 0 10px #00ff00,0 0 20px #00ffff,0 0 30px #00ff00 inset; }
-.stFileUploader>div { border:2px dashed #00ff00; border-radius:12px; padding:25px; background-color:#111111; transition:0.3s; }
-.stFileUploader>div:hover { border-color:#00ffff; box-shadow:0 0 15px #00ff00,0 0 25px #00ffff inset; }
-.stTextInput>div>div>input, .stTextArea>div>div>textarea, .stNumberInput>div>div>input { background-color:#111111; color:#00ff00; border:1px solid #00ff00; border-radius:5px; padding:5px; }
-.stTextInput>div>div>input:focus, .stTextArea>div>div>textarea:focus, .stNumberInput>div>div>input:focus { border-color:#ff0000; outline:none; box-shadow:0 0 10px #ff0000,0 0 20px #00ff00 inset; }
-.stProgress>div>div>div>div { background-color:#00ff00 !important; border-radius:6px; height:15px; }
-.registry-entry { border:1px solid #00ff00; padding:15px; margin:5px 0; border-radius:8px; background-color:#111111; transition:0.3s; animation: entry-glitch 2s infinite alternate; }
-.registry-entry:hover { border-color:#ff0000; box-shadow:0 0 15px #00ff00,0 0 30px #ff0000 inset; }
-a { color:#00ffff; text-decoration:none; }
-a:hover { text-decoration:underline; color:#00ff00; }
-@keyframes flicker { 0% {opacity:0.9; text-shadow:0 0 5px #00ffff;} 50% {opacity:1; text-shadow:0 0 20px #00ff00,0 0 30px #ff0000;} 100% {opacity:0.95; text-shadow:0 0 10px #00ff00,0 0 20px #ff0000;} }
-@keyframes entry-glitch { 0% { box-shadow:0 0 10px #00ff00,0 0 20px #ff0000; } 50% { box-shadow:0 0 15px #00ff00,0 0 25px #ff0000 inset; } 100% { box-shadow:0 0 12px #00ff00,0 0 22px #ff0000; } }
+body { background-color:#050505; color:#ff5555; font-family:'Courier New', monospace; }
+
+/* Titres principaux : doré et rouge vif */
+h1,h2,h3 {
+    color:#ffd700; 
+    text-shadow:0 0 8px #ffdd55,0 0 15px #ff5555; 
+    animation:flicker 1.8s infinite alternate; 
+    font-weight:bold;
+}
+
+/* Titres secondaires : argent/titane */
+h4,h5,h6 {
+    color:#c0c0c0; 
+    text-shadow:0 0 6px #d9d9d9,0 0 12px #999999; 
+    animation:flicker 1.8s infinite alternate; 
+    font-weight:bold;
+}
+
+/* Paragraphes : rouge doux avec reflets dorés */
+p {
+    color:#ff6666; 
+    text-shadow:0 0 5px #ffaaaa,0 0 12px #ffd700; 
+}
+
+/* Liens et textes secondaires : argent */
+li, span { color:#c0c0c0; }
+
+a { color:#ffcc00; text-decoration:none; }
+a:hover { text-decoration:underline; color:#ffd700; }
+
+/* Boutons */
+.stButton>button {
+    background-color:#111111; 
+    color:#ffd700; 
+    border:2px solid #ffd700; 
+    font-weight:bold; 
+    padding:0.5em 1em; 
+    text-transform:uppercase; 
+    transition:0.3s;
+}
+
+.stButton>button:hover {
+    background-color:#ffd700; 
+    color:#050505; 
+    box-shadow:0 0 10px #ffd700,0 0 20px #ff5555 inset;
+}
+
+/* Uploaders */
+.stFileUploader>div {
+    border:2px dashed #ffd700; 
+    border-radius:12px; 
+    padding:25px; 
+    background-color:#111111; 
+    transition:0.3s;
+}
+.stFileUploader>div:hover {
+    border-color:#ff5555; 
+    box-shadow:0 0 15px #ffd700,0 0 25px #ff5555 inset;
+}
+
+/* Inputs */
+.stTextInput>div>div>input, .stTextArea>div>div>textarea, .stNumberInput>div>div>input {
+    background-color:#111111; 
+    color:#ffd700; 
+    border:1px solid #ffd700; 
+    border-radius:5px; 
+    padding:5px;
+}
+.stTextInput>div>div>input:focus, .stTextArea>div>div>textarea:focus, .stNumberInput>div>div>input:focus {
+    border-color:#ff5555; 
+    outline:none; 
+    box-shadow:0 0 10px #ff5555,0 0 20px #ffd700 inset;
+}
+
+/* Barre de progression */
+.stProgress>div>div>div>div {
+    background-color:#ffd700 !important; 
+    border-radius:6px; 
+    height:15px;
+}
+
+/* Entrées du registre */
+.registry-entry {
+    border:1px solid #ffd700; 
+    padding:15px; 
+    margin:5px 0; 
+    border-radius:8px; 
+    background-color:#111111; 
+    transition:0.3s; 
+    animation: entry-glitch 2s infinite alternate;
+}
+.registry-entry:hover {
+    border-color:#ff5555; 
+    box-shadow:0 0 15px #ffd700,0 0 30px #ff5555 inset;
+}
+
+/* Animations */
+@keyframes flicker { 
+    0% {opacity:0.9; text-shadow:0 0 5px #ffd700;}  
+    50% {opacity:1; text-shadow:0 0 15px #ff5555,0 0 25px #ffd700;}  
+    100% {opacity:0.95; text-shadow:0 0 10px #ffd700,0 0 20px #ff5555;} 
+}
+@keyframes entry-glitch { 
+    0% { box-shadow:0 0 10px #ffd700,0 0 20px #ff5555; }  
+    50% { box-shadow:0 0 15px #ffd700,0 0 25px #ff5555 inset; }  
+    100% { box-shadow:0 0 12px #ffd700,0 0 22px #ff5555; } 
+}
+
+/* Scrollbar */
 ::-webkit-scrollbar { width:10px; }
 ::-webkit-scrollbar-track { background:#111111; }
-::-webkit-scrollbar-thumb { background-color:#00ff00; border-radius:10px; border:2px solid #050505; }
+::-webkit-scrollbar-thumb { background-color:#ffd700; border-radius:10px; border:2px solid #050505; }
 </style>
 """, unsafe_allow_html=True)
 
