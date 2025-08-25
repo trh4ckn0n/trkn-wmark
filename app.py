@@ -96,13 +96,15 @@ h4,h5,h6 {
 }
 
 /* Paragraphes : rouge doux avec reflets dorés */
+
 p {
-    color:#ff6666; 
-    text-shadow:0 0 5px #ffaaaa,0 0 12px #ffd700; 
+    color:#ff66cc; 
+    text-shadow:0 0 8px #ff99cc,0 0 16px #00ff66; 
+    animation:flicker 1.5s infinite alternate;
 }
 
 /* Liens et textes secondaires : argent */
-li, span { color:#c0c0c0; }
+li, span { color:#00ffcc; }
 
 a { color:#ffcc00; text-decoration:none; }
 a:hover { text-decoration:underline; color:#ffd700; }
