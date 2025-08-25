@@ -6,4 +6,4 @@ pycryptodome      # alternative AES + chiffrement plus performant
 opencv-python-headless==4.8.1.78  # si traitement d’images plus avancé
 scikit-image==1.3.0       # détection de motifs, comparaison avancée
 requests           # pour appels API externes (ex: OpenAI)
-openai             # si utilisation OpenAI pour motifs complexes
+openai==0.28             # si utilisation OpenAI pour motifs complexes
