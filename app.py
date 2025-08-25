@@ -106,7 +106,7 @@ if st.button("Générer motif"):
     buf = io.BytesIO()
     motif_img.save(buf, format="PNG")
     buf.seek(0)
-    st.image(motif_img, caption=f"Motif généré pour {username}", use_column_width=False)
+    st.image(motif_img, caption=f"Motif généré pour {username}", use_container_width=False)
     st.download_button("Télécharger le motif PNG", buf, file_name=f"motif_{username}.png")
     save_registry({"user":username, "seed":seed, "date":str(datetime.now())})
     st.success(f"Motif généré avec seed {seed} ✅")
