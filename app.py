@@ -195,7 +195,7 @@ a:hover { text-decoration:underline; color:#ffd700; }
 st.title("⚡ MOTIF CHALLENGE - trhacknon ⚡")
 st.markdown("#### Génération, application et détection de motifs complexes | Dark Mode Hacker")
 video_html = """
-<video width="100%" autoplay muted loop playsinline>
+<video width="100%" autoplay muted loop playsinline controlsList="nodownload noplaybackrate">
   <source src="https://j.top4top.io/m_3524t2w3f0.mp4" type="video/mp4">
   Votre navigateur ne supporte pas la vidéo.
 </video>
