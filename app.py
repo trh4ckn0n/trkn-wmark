@@ -106,7 +106,7 @@ p {
 /* Liens et textes secondaires : argent */
 li, span { color:#00ffcc; }
 
-a { color:#ffcc00; text-decoration:none; }
+a { color:#ffff00; text-decoration:none; }
 a:hover { text-decoration:underline; color:#ffd700; }
 
 /* Boutons */
