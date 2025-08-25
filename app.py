@@ -1,8 +1,7 @@
 import streamlit as st
 from PIL import Image, ImageDraw, ImageFilter
 import numpy as np
-import io, json, os, hashlib
-import random
+import io, json, os, hashlib, random
 from datetime import datetime
 
 # ---------------- CONFIG -----------------
@@ -32,18 +31,27 @@ def generate_motif(seed=None, size=200):
     random.seed(seed)
     img = Image.new("RGBA", (size, size), (0,0,0,0))
     draw = ImageDraw.Draw(img)
-    for _ in range(random.randint(5, 20)):
-        shape_type = random.choice(["ellipse","rectangle","line"])
+
+    for _ in range(random.randint(5, 25)):
+        shape_type = random.choice(["ellipse","rectangle","line","polygon"])
         x0, y0 = random.randint(0,size), random.randint(0,size)
         x1, y1 = random.randint(0,size), random.randint(0,size)
-        color = (random.randint(50,255), random.randint(50,255), random.randint(50,255), random.randint(100,200))
+        x0, x1 = min(x0,x1), max(x0,x1)
+        y0, y1 = min(y0,y1), max(y0,y1)
+
+        color = (random.randint(50,255), random.randint(50,255), random.randint(50,255), random.randint(100,220))
+
         if shape_type=="ellipse":
             draw.ellipse([x0,y0,x1,y1], fill=color)
         elif shape_type=="rectangle":
             draw.rectangle([x0,y0,x1,y1], fill=color)
-        else:
-            draw.line([x0,y0,x1,y1], fill=color, width=random.randint(1,5))
-    img = img.filter(ImageFilter.GaussianBlur(random.uniform(0,2)))
+        elif shape_type=="line":
+            draw.line([x0,y0,x1,y1], fill=color, width=random.randint(1,4))
+        elif shape_type=="polygon":
+            points = [(random.randint(0,size), random.randint(0,size)) for _ in range(random.randint(3,6))]
+            draw.polygon(points, fill=color)
+
+    img = img.filter(ImageFilter.GaussianBlur(random.uniform(0,1.5)))
     return img, seed
 
 def apply_motif(image: Image.Image, motif: Image.Image, opacity=0.3):
@@ -56,7 +64,6 @@ def apply_motif(image: Image.Image, motif: Image.Image, opacity=0.3):
     return combined
 
 def check_motif(original_motif: Image.Image, user_image: Image.Image, threshold=50):
-    # Simple comparison: check difference in numpy arrays
     original = np.array(original_motif.resize(user_image.size).convert("L"))
     user = np.array(user_image.convert("L"))
     diff = np.abs(original.astype(int)-user.astype(int))
@@ -94,13 +101,13 @@ st.subheader("🔹 Générer un motif unique")
 username = st.text_input("Nom / identifiant du membre")
 motif_size = st.slider("Taille du motif", 100, 500, 200)
 if st.button("Générer motif"):
-    motif_img, seed = generate_motif(seed=int(hashlib.sha256(username.encode()).hexdigest(),16)%1_000_000, size=motif_size)
+    user_hash = int(hashlib.sha256(username.encode()).hexdigest(),16) % 1_000_000
+    motif_img, seed = generate_motif(seed=user_hash, size=motif_size)
     buf = io.BytesIO()
     motif_img.save(buf, format="PNG")
     buf.seek(0)
     st.image(motif_img, caption=f"Motif généré pour {username}", use_column_width=False)
     st.download_button("Télécharger le motif PNG", buf, file_name=f"motif_{username}.png")
-    # Sauvegarde du motif
     save_registry({"user":username, "seed":seed, "date":str(datetime.now())})
     st.success(f"Motif généré avec seed {seed} ✅")
 
